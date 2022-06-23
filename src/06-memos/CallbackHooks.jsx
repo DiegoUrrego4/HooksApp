@@ -4,8 +4,8 @@ import { ShowIncrement } from './ShowIncrement';
 export const CallbackHooks = () => {
   const [counter, setCounter] = useState(10);
 
-  const onIncrement = useCallback(() => {
-    setCounter((value) => value + 1);
+  const onIncrement = useCallback((value) => {
+    setCounter((c) => c + value);
   }, []);
 
   //   const onIncrement = () => {
@@ -15,7 +15,7 @@ export const CallbackHooks = () => {
     <>
       <h1>useCallbackHook: {counter}</h1>
       <hr />
-      <ShowIncrement increment={ onIncrement } />
+      <ShowIncrement increment={onIncrement} />
     </>
   );
 };
