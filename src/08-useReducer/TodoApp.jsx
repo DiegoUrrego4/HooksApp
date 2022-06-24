@@ -1,24 +1,40 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { TodoAdd, TodoList, todoReducer } from './';
 
-const initialState = [
-  {
-    id: new Date().getTime(),
-    description: 'Recolectar la piedra del alma',
-    done: false,
-  },
-  {
-    id: new Date().getTime() * 3,
-    description: 'Recolectar la piedra del tiempo',
-    done: false,
-  },
-];
+const initialState = [];
+
+const init = () => {
+  return JSON.parse(localStorage.getItem('todos')) || [];
+};
 
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const handleNewTodo = (todo) => {
-    console.log({ todo });
+    const action = {
+      type: '[TODO] Add Todo',
+      payload: todo,
+    };
+    // Para enviar la acción al reducer debemos usar el dispatch
+    dispatch(action);
+  };
+
+  const handleDeleteTodo = (todoId) => {
+    dispatch({
+      type: '[TODO] Remove Todo',
+      payload: todoId,
+    });
+  };
+
+  const handleToggleTodo = (todoId) => {
+    dispatch({
+      type: '[TODO] Toggle Todo',
+      payload: todoId,
+    });
   };
 
   return (
@@ -30,7 +46,11 @@ export const TodoApp = () => {
 
       <div className='row'>
         <div className='col-7'>
-          <TodoList todos={todos} />
+          <TodoList
+            todos={todos}
+            onDeleteTodo={handleDeleteTodo}
+            onToggleTodo={handleToggleTodo}
+          />
         </div>
 
         <div className='col-5'>
