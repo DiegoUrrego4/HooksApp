@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Padre } from './07-tarea-memo/07-tarea-memo/Padre';
 // import { CallbackHooks } from './06-memos/CallbackHooks';
 // import { CounterApp } from './01-useState/CounterApp';
 // import { CounterWithCustomHook } from './01-useState/CounterWithCustomHook';
@@ -12,11 +11,14 @@ import { Padre } from './07-tarea-memo/07-tarea-memo/Padre';
 // import { MemoHook } from './06-memos/MemoHook';
 // import { Memorize } from './06-memos/Memorize';
 // import { MultipleCustomHook } from './03-examples/MultipleCustomHook';
+// import { Padre } from './07-tarea-memo/07-tarea-memo/Padre';
 // import { SimpleForm } from './02-useEffect/simpleForm';
+// import './08-useReducer/intro-reducer'
+import { TodoApp } from './08-useReducer/TodoApp';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
-    <Padre />
+    <TodoApp />
   // </React.StrictMode>
 );
